@@ -13,3 +13,10 @@ export interface Post {
   };
   id: string;
 }
+
+export interface AppState {
+  user: User,
+  posts: {
+    messages: Post[]
+  }
+}

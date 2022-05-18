@@ -11,3 +11,8 @@ export function setNewUserInfo(userData: User) {
   console.dir(userData);
   console.log("user data changed");
 }
+
+export function addPostToBD(post: Post): void {
+  console.dir(post);
+  console.log('The post added');
+}

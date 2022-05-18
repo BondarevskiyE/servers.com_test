@@ -11,7 +11,7 @@ const initialState: User = {
 
 export const getUser = (state: User) => state;
 
-export default createReducer(initialState, {
+export const reducer = createReducer(initialState, {
   [CHANGE_USER_INFO]: (state, { payload }) => ({
     ...state,
     ...payload,

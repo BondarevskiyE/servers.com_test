@@ -4,5 +4,5 @@ function randomDate(start: Date, end: Date): Date {
   );
 }
 
-export const getRandomDate = (): Date =>
+export const getRandomDate = () => 
   randomDate(new Date(2012, 0, 1), new Date());

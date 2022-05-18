@@ -1,5 +1,5 @@
 import { createReducer } from "@reduxjs/toolkit";
-import { ADD_POSTS, REMOVE_POST } from "../actions";
+import { ADD_POST, ADD_POSTS, REMOVE_POST } from "../actions";
 
 import { Post } from "../../types";
 
@@ -13,7 +13,11 @@ const initialState: State = {
 
 export const getPosts = (state: State) => state.messages;
 
-export default createReducer(initialState, {
+export const reducer = createReducer(initialState, {
+  [ADD_POST]: (state, { payload }) => ({
+    ...state,
+    messages: [payload.post, ...state.messages]
+  }),
   [ADD_POSTS]: (state, { payload }) => ({
     ...state,
     messages: [...state.messages, ...payload.posts],
