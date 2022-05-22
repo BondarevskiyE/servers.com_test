@@ -3,7 +3,8 @@ import { getRandomDate, generateId } from "./utils";
 
 const MichaelId = generateId();
 
-export const postsStub: Post[] = [
+const postsStub = (): Post[] =>
+  [
   {
     date: getRandomDate(),
     text: "The new text from the new user. Hey! It's amazing! Good message, friend!",
@@ -76,4 +77,21 @@ export const postsStub: Post[] = [
     },
     id: generateId(),
   },
-];
+  ];
+
+class Stubs {
+  newPosts: Post[];
+  constructor() {
+    this.newPosts = []
+  }
+
+  getPosts():  Post[] {
+    return [...this.newPosts, ...postsStub()]
+  }
+
+  setNewPost(post: Post) {
+    this.newPosts = [post, ...this.newPosts];
+  }
+}
+
+export default new Stubs();

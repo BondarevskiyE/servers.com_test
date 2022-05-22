@@ -8,11 +8,11 @@ export const Header = () => {
     <div className="header">
       <div className="header__container">
         <div className="header__link">
-          <Link to="/profile">My profile</Link>
+          <Link to="/">My profile</Link>
         </div>
 
         <div className="header__link">
-          <Link to="/">Feed</Link>
+          <Link to="/feed">Feed</Link>
         </div>
       </div>
     </div>

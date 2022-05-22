@@ -1,0 +1,15 @@
+.message {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  height: 100%;
+  box-sizing: border-box;
+  border-bottom: 1px solid #797f9c;
+  background: #565b74;
+  color: white;
+  padding: 10px;
+  &__info {
+    display: flex;
+    justify-content: space-between;
+  }
+}

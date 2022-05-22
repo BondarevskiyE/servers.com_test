@@ -1,9 +1,3 @@
-export interface User {
-  name: string;
-  age: number;
-  id: string;
-}
-
 export interface Post {
   date: Date;
   text: string;
@@ -14,9 +8,19 @@ export interface Post {
   id: string;
 }
 
+export interface User {
+  name: string;
+  age: number;
+  userPosts: Post[];
+  id: string;
+}
+
+export type FilteredBy = { id: string | null, name: string | null };
+
 export interface AppState {
-  user: User,
+  user: User;
   posts: {
-    messages: Post[]
-  }
+    messages: Post[];
+    filteredBy: FilteredBy
+  };
 }

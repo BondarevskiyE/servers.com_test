@@ -1,5 +1,5 @@
 import { combineReducers } from "redux";
-import * as posts  from "./posts";
+import * as posts from "./posts";
 import * as user from "./user";
 
 const reducer = combineReducers({
@@ -7,8 +7,4 @@ const reducer = combineReducers({
   user: user.reducer,
 });
 
-export {
-  posts,
-  user,
-  reducer
-};
+export { posts, user, reducer };

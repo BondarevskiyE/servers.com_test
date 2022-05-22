@@ -13,18 +13,18 @@ code {
 }
 
 button {
-    color: white;
-    background: #565b74;
-    border-radius: 5px;
-    border: none;
-    padding: 5px 10px;
-    cursor: pointer;
-    &:hover {
-        opacity: 0.8;
-    }
-    &:disabled {
-      opacity: 0.7;
-    }
+  color: white;
+  background: #565b74;
+  border-radius: 5px;
+  border: none;
+  padding: 5px 10px;
+  cursor: pointer;
+  &:hover {
+    opacity: 0.8;
+  }
+  &:disabled {
+    opacity: 0.7;
+  }
 }
 
 p,

@@ -1,27 +1,34 @@
 import { generateId } from "../../utils";
 
-import { Post, User } from "../../types";
+import { Post } from "../../types";
 
 export const ADD_POST = "ADD_POST";
 export const ADD_POSTS = "ADD_POSTS";
 export const REMOVE_POST = "REMOVE_POST";
-export const CHANGE_USER_INFO = "CHANGE_USER_INFO";
 
 export const LOAD_POSTS = "LOAD_POSTS";
 export const SEND_NEW_USER_INFO = "SEND_NEW_USER_INFO";
+export const FILTER_BY_AUTHOR = "FILTER_BY_AUTHOR";
+export const SET_FILTER_OPTIONS = "SET_FILTER_OPTIONS";
+export const CANCEL_FILTERING = "CANCEL_FILTERING";
+export const CLEAR_POSTS = "CLEAR_POSTS";
+
 export const LOG_ERROR = "LOG_ERROR";
 
-
 export const loadPosts = () => ({
-  type: LOAD_POSTS
+  type: LOAD_POSTS,
 });
 
-export const addPost = (post: Omit<Post, 'id'>) => ({
-  type: ADD_POST,
-  payload: {
-    post: { ...post, id: generateId() },
-  },
-});
+export const addPost = (post: Omit<Post, "id">) => {
+  const newPost = { ...post, id: generateId() };
+
+  return {
+    type: ADD_POST,
+    payload: {
+      post: newPost,
+    },
+  }
+};
 
 export const removePost = (id: string) => ({
   type: REMOVE_POST,
@@ -30,9 +37,14 @@ export const removePost = (id: string) => ({
   },
 });
 
-export const changeUserInfo = (userInfo: User) => ({
-  type: CHANGE_USER_INFO,
+export const filterByAuthor = (id: string, name: string) => ({
+  type: FILTER_BY_AUTHOR,
   payload: {
-    userInfo,
-  },
-});
+    id,
+    name
+  }
+})
+
+export const cancelFiltering = () => ({
+  type: CANCEL_FILTERING
+})
