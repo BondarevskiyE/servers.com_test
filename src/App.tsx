@@ -25,12 +25,10 @@ function App({ loadPosts }: Props): JSX.Element {
 
   return (
     <Router>
-      <div className="app">
-        <Header />
-        <div className="main">
-          <Routes />
-        </div>
-        </div>
+      <Header />
+      <div className="main">
+        <Routes />
+      </div>
     </Router>
   );
 }

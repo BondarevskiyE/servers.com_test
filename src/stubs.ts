@@ -3,7 +3,7 @@ import { getRandomDate, generateId } from "./utils";
 
 const MichaelId = generateId();
 
-const postsStub = (): Post[] =>
+const postsStub: Post[] =
   [
   {
     date: getRandomDate(),
@@ -31,6 +31,15 @@ const postsStub = (): Post[] =>
       id: MichaelId,
     },
     id: generateId(),
+    },
+    {
+    date: getRandomDate(),
+    text: "Oh, nobody is reading my blog. How come? It's need to change the theme and text style.",
+    author: {
+      name: "Michael Douglas",
+      id: MichaelId,
+    },
+    id: generateId(),
   },
   {
     date: getRandomDate(),
@@ -76,21 +85,34 @@ const postsStub = (): Post[] =>
       id: "1",
     },
     id: generateId(),
-  },
+    },
+    {
+      date: getRandomDate(),
+      text: "Some incredible sentences about my life. Thank you for reading.",
+      author: {
+        name: "Egor Bondarevskii",
+        id: "1",
+      },
+      id: generateId(),
+    },
   ];
 
 class Stubs {
-  newPosts: Post[];
+  posts: Post[];
   constructor() {
-    this.newPosts = []
+    this.posts = postsStub
   }
 
   getPosts():  Post[] {
-    return [...this.newPosts, ...postsStub()]
+    return this.posts
   }
 
   setNewPost(post: Post) {
-    this.newPosts = [post, ...this.newPosts];
+    this.posts = [post, ...this.posts];
+  }
+
+  removePost(id: string) {
+    this.posts = this.posts.filter((post) => post.id !== id)
   }
 }
 

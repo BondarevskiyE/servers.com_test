@@ -1,6 +1,6 @@
 import { PayloadAction } from "@reduxjs/toolkit";
 import { call, put, select } from "redux-saga/effects";
-import { loadPostsFromApi, loadPostsFromApiByUserId, addPostToBD } from "../../api";
+import { loadPostsFromApi, loadPostsFromApiByUserId, addPostToDB, removePostFromDB } from "../../api";
 import { posts } from "../";
 import * as actions from "../actions";
 
@@ -62,7 +62,7 @@ function* addPost(action: PayloadAction<{ post: Post }>) {
       payload: { post },
     } = action;
 
-    yield call(addPostToBD, post);
+    yield call(addPostToDB, post);
   } catch (e) {
     yield put({
       type: actions.LOG_ERROR,
@@ -84,7 +84,18 @@ function* cancelFiltering() {
       error: e,
     });
   }
+}
 
+export function* removePost(action: PayloadAction<{id: string}>) {
+  try {
+    yield call(removePostFromDB, action.payload.id);
+
+  } catch (e) {
+    yield put({
+      type: actions.LOG_ERROR,
+      error: e,
+    });
+  }
 }
 
 export { loadPosts, addPost, cancelFiltering, setFilterOptions };

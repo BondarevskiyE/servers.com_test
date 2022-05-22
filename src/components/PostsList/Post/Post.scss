@@ -12,4 +12,16 @@
     display: flex;
     justify-content: space-between;
   }
+  &__filter {
+    color: black
+  }
+  &__right {
+    width: 200px;
+    display: flex;
+    justify-content: flex-start;
+    flex-direction: column;
+    button {
+      color: red;
+    }
+  }
 }

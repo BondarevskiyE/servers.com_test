@@ -14,8 +14,14 @@ export function loadPostsFromApiByUserId(id?: string): Post[] {
   return stubs.getPosts().filter((post) => post.author.id === id);
 }
 
-export function addPostToBD(post: Post): void {
+export function addPostToDB(post: Post): void {
   console.dir(post);
   console.log("The post added");
   stubs.setNewPost(post);
+}
+
+export function removePostFromDB(id: string): void {
+  console.log("post has been removed");
+
+  stubs.removePost(id);
 }

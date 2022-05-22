@@ -1,14 +1,16 @@
 import MyProfile from "./MyProfile";
 import { connect, ConnectedProps } from "react-redux";
-import { loadPosts, user } from "../../store";
+import { loadPosts, posts, user, removePost } from "../../store";
 import { AppState } from "../../types";
 
 const mapStateToProps = (state: AppState) => ({
   user: user.getUser(state),
+  posts: posts.getUserPosts(state)
 });
 
 const mapDispatchToProps = {
   getPosts: loadPosts,
+  removePost
 }
 
 const connector = connect(mapStateToProps, mapDispatchToProps);

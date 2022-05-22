@@ -5,14 +5,14 @@ import photo from '../../assets/photo.jpg';
 import { Props } from "./";
 import './MyProfile.scss';
 
-const MyProfile = ({ user, getPosts }: Props): JSX.Element => {
-  const { userPosts, age, name } = user;
-  
+const MyProfile = ({ user, posts, getPosts, removePost }: Props): JSX.Element => {
+  const { age, name } = user;
+
   const loadMorePosts = () => {
     getPosts();
   };
 
-  const isItemLoaded = (index: number) => !!userPosts[index]
+  const isItemLoaded = (index: number) => !!posts[index]
 
   return (
     <div className="profile">
@@ -33,9 +33,10 @@ const MyProfile = ({ user, getPosts }: Props): JSX.Element => {
       <h3 className="profile__info__posts-title">My posts</h3>
 
       <PostsList
-        posts={userPosts}
+        posts={posts}
         loadMorePosts={loadMorePosts}
         isItemLoaded={isItemLoaded}
+        removePost={removePost}
       />
     </div>
   );

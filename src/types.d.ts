@@ -11,7 +11,6 @@ export interface Post {
 export interface User {
   name: string;
   age: number;
-  userPosts: Post[];
   id: string;
 }
 

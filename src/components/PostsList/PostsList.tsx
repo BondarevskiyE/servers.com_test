@@ -12,14 +12,16 @@ interface Props {
     posts: PostType[],
     isItemLoaded: (index: number) => boolean,
     loadMorePosts: () => void,
-    filterByAuthor?: (id: string, name: string) => void
+    filterByAuthor?: (id: string, name: string) => void,
+    removePost?: (id: string) => void 
 }
 
 const PostsList = ({
     posts,
     isItemLoaded,
     loadMorePosts,
-    filterByAuthor
+    filterByAuthor,
+    removePost
 }: Props) => {
 
     return (
@@ -41,7 +43,7 @@ const PostsList = ({
                                 onItemsRendered={onItemsRendered}
                                 ref={ref}
                             >
-                                {(props) => Post({...props, filterByAuthor, post: posts[props.index]})}
+                                {(props) => Post({...props, filterByAuthor, removePost, post: posts[props.index]})}
                             </List>
                         )}    
                     </InfiniteLoader>

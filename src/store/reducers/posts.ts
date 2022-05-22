@@ -21,6 +21,7 @@ const initialState: State = {
 };
 
 export const getPosts = (state: AppState) => state.posts.messages;
+export const getUserPosts = (state: AppState) => state.posts.messages.filter((post) => post.author.id === state.user.id)
 export const getFilteredBy = (state: AppState) => state.posts.filteredBy;
 
 export const reducer = createReducer(initialState, {
@@ -30,7 +31,7 @@ export const reducer = createReducer(initialState, {
   }),
   [ADD_POSTS]: (state, { payload }) => {
     const { posts } = payload;
-    let newPosts = [ ...state.messages, ...posts];
+    let newPosts = [ ...posts];
     newPosts = newPosts.sort(sortByDate);
 
     return ({
@@ -48,17 +49,17 @@ export const reducer = createReducer(initialState, {
       }
     }
   },
-  [CLEAR_POSTS]: () => ({
-    messages: [],
-    filteredBy: {
-      id: null,
-      name: null
-    }
-  }),
   [REMOVE_POST]: (state, { payload }) => {
     const messages = state.messages.filter(
       (message) => message.id !== payload.id
     );
     return { ...state, messages };
   },
+  [CLEAR_POSTS]: () => ({
+    messages: [],
+    filteredBy: {
+      id: null,
+      name: null
+    }
+  })
 });
