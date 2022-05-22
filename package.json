@@ -1,6 +1,7 @@
 {
   "name": "servers.com-test",
   "version": "0.1.0",
+  "homepage": "https://BondarevskiyE.github.io/servers.com_test",
   "private": true,
   "dependencies": {
     "@reduxjs/toolkit": "^1.8.1",
@@ -30,7 +31,9 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
   },
   "eslintConfig": {
     "extends": [
@@ -55,6 +58,7 @@
     "@types/react-router-dom": "^5.3.3",
     "@types/react-virtualized-auto-sizer": "^1.0.1",
     "@types/react-window": "^1.8.5",
-    "@types/react-window-infinite-loader": "^1.0.6"
+    "@types/react-window-infinite-loader": "^1.0.6",
+    "gh-pages": "^4.0.0"
   }
 }
