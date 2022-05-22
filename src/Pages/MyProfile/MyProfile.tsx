@@ -1,18 +1,22 @@
-import React from "react";
+import React, { useEffect } from "react";
 import PostsList from "../../components/PostsList";
 import photo from '../../assets/photo.jpg';
 
 import { Props } from "./";
 import './MyProfile.scss';
 
-const MyProfile = ({ user, posts, getPosts, removePost }: Props): JSX.Element => {
+const MyProfile = ({ user, posts, getPosts, removePost, cancelFiltering }: Props): JSX.Element => {
   const { age, name } = user;
 
   const loadMorePosts = () => {
     getPosts();
   };
 
-  const isItemLoaded = (index: number) => !!posts[index]
+  const isItemLoaded = (index: number) => !!posts[index];
+
+  useEffect(() => {
+    cancelFiltering();
+  }, [cancelFiltering]);
 
   return (
     <div className="profile">

@@ -8,10 +8,22 @@ export function loadPostsFromApi(): Post[] {
   return stubs.getPosts();
 }
 
-export function loadPostsFromApiByUserId(id?: string): Post[] {
+export function loadPostsFromApiByUserId(id: string): Post[] {
   console.log("Start loading");
   console.log("End Loading");
   return stubs.getPosts().filter((post) => post.author.id === id);
+}
+
+export function loadPostsFromApiByDate(date: { from: number, to: number }): Post[] {
+  console.log("Start loading");
+  console.log("End Loading");
+  return stubs.getPosts().filter((post) => {
+    const postDate = post.date.getTime();
+    if(postDate > date.from && postDate < date.to) {
+        return true
+    }
+    return false;
+})
 }
 
 export function addPostToDB(post: Post): void {

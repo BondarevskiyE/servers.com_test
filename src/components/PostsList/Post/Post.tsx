@@ -15,13 +15,13 @@ const Post = ({
   post,
   filterByAuthor,
   removePost
-}: ListChildComponentProps & Props) => (
+}: ListChildComponentProps & Props): JSX.Element => (
   <div style={style} className="message">
     <h3>{post.text}</h3>
     <div className="message__info">
       <div>
         <p>{`Author: ${post.author.name}`}</p>
-        {filterByAuthor ? <button onClick={() => filterByAuthor(post.author.id, post.author.name)} className="message__filter">filter by author</button> : null}
+        {filterByAuthor ? <button onClick={() => filterByAuthor(post.author.id, `by ${post.author.name}`)} className="message__filter">filter by author</button> : null}
       </div>
       <div className="message__right">
         <p>{post.date.toLocaleString("en-US")}</p>

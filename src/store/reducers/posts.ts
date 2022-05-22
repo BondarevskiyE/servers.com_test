@@ -6,23 +6,23 @@ import { Post, AppState } from "../../types";
 
 type State = {
   messages: Post[];
-  filteredBy: {
-    id: string | null,
+  filter: {
+    filtered: boolean,
     name: string | null
   }
 };
 
 const initialState: State = {
   messages: [],
-  filteredBy: {
-    id: null,
+  filter: {
+    filtered: false,
     name: null
   },
 };
 
 export const getPosts = (state: AppState) => state.posts.messages;
 export const getUserPosts = (state: AppState) => state.posts.messages.filter((post) => post.author.id === state.user.id)
-export const getFilteredBy = (state: AppState) => state.posts.filteredBy;
+export const getFilter = (state: AppState) => state.posts.filter;
 
 export const reducer = createReducer(initialState, {
   [ADD_POST]: (state, { payload }) => ({
@@ -40,12 +40,13 @@ export const reducer = createReducer(initialState, {
     })
   },
   [SET_FILTER_OPTIONS]: (state, { payload }) => {
-    const { name, id } = payload;
+    const { name } = payload;
 
     return {
       ...state,
-      filteredBy: {
-        name, id
+      filter: {
+        filtered: true,
+        name
       }
     }
   },
@@ -57,8 +58,8 @@ export const reducer = createReducer(initialState, {
   },
   [CLEAR_POSTS]: () => ({
     messages: [],
-    filteredBy: {
-      id: null,
+    filter: {
+      filtered: false,
       name: null
     }
   })

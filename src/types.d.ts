@@ -14,12 +14,17 @@ export interface User {
   id: string;
 }
 
-export type FilteredBy = { id: string | null, name: string | null };
+export type Filter = { name: string | null };
+
+export type FilterOptions = {
+  id: string | null,
+  date: { from: number, to: number } | null
+}
 
 export interface AppState {
   user: User;
   posts: {
     messages: Post[];
-    filteredBy: FilteredBy
+    filter: Filter
   };
 }

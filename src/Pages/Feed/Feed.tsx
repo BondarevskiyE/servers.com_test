@@ -8,15 +8,19 @@ import './Feed.scss';
 
 const Feed = ({ 
     posts,
-    filteredBy,
+    filter,
     cancelFiltering,
     user,
     getPosts,
     addPost,
-    filterByAuthor
+    filterPosts
 }: Props): JSX.Element => {
-    const [isModalOpen, setModalOpen] = useState(false)
-    const onHandleModal = () => setModalOpen(!isModalOpen)
+    const [isModalOpen, setModalOpen] = useState(false);
+
+    const [dateFrom, setDateFrom] = useState(new Date());
+    const [dateTo, setDateTo] = useState(new Date());
+
+    const onHandleModal = () => setModalOpen(!isModalOpen);
 
     const onHandleAddPost = (text: string) => {
         addPost({
@@ -35,6 +39,16 @@ const Feed = ({
     };
 
     const isItemLoaded = (index: number) => !!posts[index]
+
+    const onHandleFilterByDate = () => {
+        const from = new Date(dateFrom).getTime();
+        const to = new Date(dateTo).getTime();
+        filterPosts(null, `from ${dateFrom.toLocaleString("en-US")} to ${dateTo.toLocaleString("en-US")}`, { from, to })
+    }
+
+    const onHandleFilterByAuthor = (id: string, name: string) => {
+        filterPosts(id, name, null);
+    }
     
     return (
         <div className="feed">
@@ -42,15 +56,26 @@ const Feed = ({
                 <h1>Feed</h1>
                 <button onClick={onHandleModal} className="feed__add-button">Add post</button>
             </div>
-            {filteredBy?.name ? <div className="feed__filtering">
-                <p>{`filtered by ${filteredBy?.name}`}</p>
+            {filter?.name ? <div className="feed__filtering">
+                <p>{`filtered ${filter?.name}`}</p>
                 <button onClick={cancelFiltering}>cancel filtering</button>
             </div> : null}
+            <div className="feed__filtering">
+                <div>
+                    <p>From</p>
+                    <input type="date" onChange={(e) => setDateFrom(new Date(e.target.value))}/>
+                </div>
+                <div>
+                    <p>To</p>
+                    <input type="date" onChange={(e) => setDateTo(new Date(e.target.value))} />
+                </div>
+                <button onClick={onHandleFilterByDate}>Filter by date</button>
+            </div>
             <PostsList
                 isItemLoaded={isItemLoaded}
                 posts={posts}
                 loadMorePosts={loadMorePosts}
-                filterByAuthor={filterByAuthor}
+                filterByAuthor={onHandleFilterByAuthor}
             />
 
             <AddPostModal

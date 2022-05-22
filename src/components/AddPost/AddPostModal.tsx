@@ -8,7 +8,7 @@ interface Props {
   onClose: () => void;
 }
 
-const AddPostModal = ({ visible = false, onAddPost, onClose }: Props) => {
+const AddPostModal = ({ visible = false, onAddPost, onClose }: Props): JSX.Element | null => {
   const [text, setText] = useState("");
   const [isTextValid, setIsTextValid] = useState(true);
 

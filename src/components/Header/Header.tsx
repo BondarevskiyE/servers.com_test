@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 import "./Header.scss";
 
-export const Header = () => {
+export const Header = (): JSX.Element => {
   return (
     <div className="header">
       <div className="header__container">

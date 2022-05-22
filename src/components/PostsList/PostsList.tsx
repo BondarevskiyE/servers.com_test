@@ -22,7 +22,7 @@ const PostsList = ({
     loadMorePosts,
     filterByAuthor,
     removePost
-}: Props) => {
+}: Props): JSX.Element => {
 
     return (
         <div className='list'>

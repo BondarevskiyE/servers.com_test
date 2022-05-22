@@ -1,18 +1,18 @@
 import Feed from "./Feed";
 import { connect, ConnectedProps } from "react-redux";
-import { posts, loadPosts, addPost, user, filterByAuthor, cancelFiltering } from "../../store";
+import { posts, loadPosts, addPost, user, filterPosts, cancelFiltering } from "../../store";
 import { AppState } from "../../types";
 
 const mapStateToProps = (state: AppState) => ({
   posts: posts.getPosts(state),
   user: user.getUser(state),
-  filteredBy: posts.getFilteredBy(state)
+  filter: posts.getFilter(state)
 });
 
 const mapDispatchToProps = {
   getPosts: loadPosts,
   addPost,
-  filterByAuthor,
+  filterPosts,
   cancelFiltering
 };
 

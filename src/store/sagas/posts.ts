@@ -1,19 +1,20 @@
 import { PayloadAction } from "@reduxjs/toolkit";
-import { call, put, select } from "redux-saga/effects";
-import { loadPostsFromApi, loadPostsFromApiByUserId, addPostToDB, removePostFromDB } from "../../api";
-import { posts } from "../";
+import { call, put } from "redux-saga/effects";
+import { loadPostsFromApi, loadPostsFromApiByUserId, addPostToDB, removePostFromDB, loadPostsFromApiByDate } from "../../api";
 import * as actions from "../actions";
 
-import { Post, FilteredBy } from "../../types";
+import { Post, FilterOptions } from "../../types";
 
-function* loadPosts() {
-
+function* loadPosts(action: PayloadAction<FilterOptions>) {
+  const { payload } = action;
+  
   try {
     let newPosts: Post[];
 
-    const filteredBy: FilteredBy = yield select(posts.getFilteredBy);
-    if (filteredBy?.id) {
-      newPosts = yield call(loadPostsFromApiByUserId, filteredBy?.id);
+    if (payload?.id) {
+      newPosts = yield call(loadPostsFromApiByUserId, payload.id);
+    } else if (payload?.date) {
+      newPosts = yield call(loadPostsFromApiByDate, payload.date)
     } else {
       newPosts = yield call(loadPostsFromApi)
     }
@@ -32,8 +33,8 @@ function* loadPosts() {
   }
 }
 
-function* setFilterOptions(action: PayloadAction<FilteredBy>) {
-  const { payload: { name, id } } = action;
+function* setFilterOptions(action: PayloadAction<FilterOptions & { name: string }>) {
+  const { payload: { name, id, date } } = action;
   try {
     yield put({
       type: actions.CLEAR_POSTS
@@ -42,11 +43,11 @@ function* setFilterOptions(action: PayloadAction<FilteredBy>) {
     yield put({
       type: actions.SET_FILTER_OPTIONS,
       payload: {
-        name, id
+        name
       }
     })
 
-    yield call(loadPosts);
+    yield call(loadPosts, { ...action, payload: { ...action.payload, id, date } });
 
   } catch (e) {
     yield put({
@@ -71,12 +72,12 @@ function* addPost(action: PayloadAction<{ post: Post }>) {
   }
 }
 
-function* cancelFiltering() {
+function* cancelFiltering(action: PayloadAction<{}>) {
   try {
     yield put({
       type: actions.CLEAR_POSTS
     });
-    yield call(loadPosts);
+    yield call(loadPosts, { ...action, payload: {id: null, date: null} });
 
   } catch (e) {
     yield put({

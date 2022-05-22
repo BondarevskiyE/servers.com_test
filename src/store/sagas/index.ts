@@ -7,7 +7,7 @@ function* root() {
     takeLatest(actions.LOAD_POSTS, loadPosts),
     takeLatest(actions.ADD_POST, addPost),
     takeLatest(actions.REMOVE_POST, removePost),
-    takeLatest(actions.FILTER_BY_AUTHOR, setFilterOptions),
+    takeLatest(actions.FILTER_POSTS, setFilterOptions),
     takeEvery(actions.CANCEL_FILTERING, cancelFiltering),
   ]);
 }

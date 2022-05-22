@@ -1,6 +1,6 @@
 import MyProfile from "./MyProfile";
 import { connect, ConnectedProps } from "react-redux";
-import { loadPosts, posts, user, removePost } from "../../store";
+import { loadPosts, posts, user, removePost, cancelFiltering } from "../../store";
 import { AppState } from "../../types";
 
 const mapStateToProps = (state: AppState) => ({
@@ -10,7 +10,8 @@ const mapStateToProps = (state: AppState) => ({
 
 const mapDispatchToProps = {
   getPosts: loadPosts,
-  removePost
+  removePost,
+  cancelFiltering
 }
 
 const connector = connect(mapStateToProps, mapDispatchToProps);
