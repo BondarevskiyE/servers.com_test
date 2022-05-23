@@ -5,7 +5,7 @@ import Feed from "./Pages/Feed";
 import MyProfile from "./Pages/MyProfile";
 import NotFound from "./Pages/NotFound";
 
-const RoutesComponent = () => (
+const RoutesComponent = (): JSX.Element => (
   <Routes>
     <Route element={<MyProfile />} path="/" />
     <Route element={<Feed />} path="/feed" />

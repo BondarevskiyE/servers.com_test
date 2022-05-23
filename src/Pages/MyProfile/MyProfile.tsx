@@ -8,11 +8,11 @@ import './MyProfile.scss';
 const MyProfile = ({ user, posts, getPosts, removePost, cancelFiltering }: Props): JSX.Element => {
   const { age, name } = user;
 
-  const loadMorePosts = () => {
+  const loadMorePosts = (): void => {
     getPosts();
   };
 
-  const isItemLoaded = (index: number) => !!posts[index];
+  const isItemLoaded = (index: number): boolean => !!posts[index];
 
   useEffect(() => {
     cancelFiltering();

@@ -22,7 +22,7 @@ const Feed = ({
 
     const onHandleModal = () => setModalOpen(!isModalOpen);
 
-    const onHandleAddPost = (text: string) => {
+    const onHandleAddPost = (text: string): void => {
         addPost({
           text,
           date: new Date(),
@@ -34,19 +34,19 @@ const Feed = ({
         onHandleModal();
     };
 
-    const loadMorePosts = () => {
+    const loadMorePosts = (): void => {
         getPosts();
     };
 
-    const isItemLoaded = (index: number) => !!posts[index]
+    const isItemLoaded = (index: number): boolean => !!posts[index]
 
-    const onHandleFilterByDate = () => {
+    const onHandleFilterByDate = (): void => {
         const from = new Date(dateFrom).getTime();
         const to = new Date(dateTo).getTime();
         filterPosts(null, `from ${dateFrom.toLocaleString("en-US")} to ${dateTo.toLocaleString("en-US")}`, { from, to })
     }
 
-    const onHandleFilterByAuthor = (id: string, name: string) => {
+    const onHandleFilterByAuthor = (id: string, name: string): void => {
         filterPosts(id, name, null);
     }
     
